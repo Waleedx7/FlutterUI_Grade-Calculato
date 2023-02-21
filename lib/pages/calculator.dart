@@ -2,24 +2,39 @@
 
 import 'package:flutter/material.dart';
 
-class CalculatorPage extends StatelessWidget {
+class CalculatorPage extends StatefulWidget {
   CalculatorPage({Key? key}) : super(key: key);
+
+  @override
+  State<CalculatorPage> createState() => _CalculatorPageState();
+}
+
+class _CalculatorPageState extends State<CalculatorPage> {
+  var literalScore = "-";
+
   final scoreTextController = TextEditingController();
+
   void calculateScore(BuildContext context) {
     final grade = double.parse(scoreTextController.text);
-    if (grade >= 90) {
-      showSnack(context, "A");
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("A")));
-    } else if (grade >= 80) {
-      showSnack(context, "B");
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("B")));
-    } else if (grade >= 70) {
-      showSnack(context, "C");
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("C")));
-    } else {
-      showSnack(context, "F");
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("F")));
-    }
+    setState(() {
+      if (grade >= 90) {
+        // showSnack(context, "A");
+        literalScore = "A";
+        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("A")));
+      } else if (grade >= 80) {
+        // showSnack(context, "B");
+        literalScore = "B";
+        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("B")));
+      } else if (grade >= 70) {
+        // showSnack(context, "C");
+        literalScore = "C";
+        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("C")));
+      } else {
+        // showSnack(context, "F");
+        literalScore = "F";
+        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("F")));
+      }
+    });
   }
 
   void showSnack(BuildContext context, String text) {
@@ -58,7 +73,7 @@ class CalculatorPage extends StatelessWidget {
             ),
             Spacer(),
             Text(
-              'A',
+              literalScore,
               style: TextStyle(
                   fontSize: 50,
                   fontWeight: FontWeight.bold,
